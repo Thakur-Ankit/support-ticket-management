@@ -1,0 +1,11 @@
+# Copy to application-local.yml (gitignored) when using PostgreSQL locally.
+# Do not commit real passwords or connection strings with secrets.
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/support_tickets
+    username: support_tickets
+    password: CHANGE_ME
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -1,0 +1,53 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Tickets</h2>
+    <a routerLink="/tickets/new" class="btn primary">New ticket</a>
+  </header>
+
+  <form class="filters" (ngSubmit)="applyFilters()">
+    <label>
+      Keyword
+      <input name="keyword" [(ngModel)]="keyword" placeholder="Search title or description" />
+    </label>
+    <label>
+      Status
+      <select name="status" [(ngModel)]="statusFilter">
+        <option value="">All statuses</option>
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </label>
+    <button type="submit" class="btn">Search</button>
+    <button type="button" class="btn ghost" (click)="clearFilters()" *ngIf="filtersApplied">Clear</button>
+  </form>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p *ngIf="loading">Loading…</p>
+
+  <p class="empty" *ngIf="!loading && !errorMessage && items.length === 0 && !filtersApplied">
+    No tickets yet. Create the first one.
+  </p>
+  <p class="empty" *ngIf="!loading && !errorMessage && items.length === 0 && filtersApplied">
+    No matches for the current search and status filter.
+  </p>
+
+  <table *ngIf="!loading && items.length > 0">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Assignee</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of items">
+        <td><a [routerLink]="['/tickets', t.id]">{{ t.title }}</a></td>
+        <td>{{ t.status }}</td>
+        <td>{{ t.priority }}</td>
+        <td>{{ t.assignee || '—' }}</td>
+        <td>{{ t.createdAt | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

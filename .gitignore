@@ -1,0 +1,100 @@
+# Support Ticket Management — Git ignore
+# Stack: Java 21 / Spring Boot (Maven) + Angular 14 + PostgreSQL/H2
+
+# ----- Secrets & local config (constitution XI / T062) -----
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.jks
+**/application-local.yml
+**/application-local.properties
+**/application-secret.yml
+**/application-secret.properties
+**/secrets/
+credentials.json
+**/local-config.yml
+
+# Keep committed examples only
+!**/application-local.yml.example
+!**/application-local.properties.example
+
+# ----- Spec Kit (machine-local; also listed under .specify/.gitignore) -----
+.specify/feature.json
+.specify/extensions/*/local-config.yml
+
+# ----- SpecStory / editor noise -----
+# .specstory/
+*.swp
+*.swo
+*~
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ----- IDEs -----
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.code-workspace
+.project
+.classpath
+.settings/
+.factorypath
+
+# ----- Java / Maven (backend/) -----
+target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+.mvn/wrapper/maven-wrapper.jar
+
+# ----- H2 / local DB files -----
+*.mv.db
+*.trace.db
+*.lock.db
+**/data/h2/
+
+# ----- Node / Angular (frontend/) -----
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.tmp/
+out-tsc/
+.angular/
+**/.angular/
+coverage/
+**/coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# ----- Test / build reports -----
+**/test-results/
+**/playwright-report/
+**/surefire-reports/
+**/failsafe-reports/
+jacoco.exec
+**/jacoco/
+
+# ----- Logs & temp -----
+logs/
+*.log
+tmp/
+temp/
+*.tmp

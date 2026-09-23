@@ -1,0 +1,65 @@
+.meta {
+  color: #4a5568;
+  margin: 0.25rem 0 0;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.5rem 1rem;
+  margin: 1.25rem 0;
+}
+
+.details dt {
+  font-weight: 600;
+}
+
+.status-actions,
+.comments {
+  margin-top: 1.5rem;
+}
+
+.status-actions .btn {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hint {
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.comments ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comments li {
+  border-bottom: 1px solid #d7dde5;
+  padding: 0.75rem 0;
+}
+
+.when {
+  margin-left: 0.5rem;
+  color: #718096;
+  font-size: 0.85rem;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 32rem;
+  margin-top: 1rem;
+}
+
+.comment-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-error {
+  color: #b42318;
+  font-size: 0.85rem;
+}
