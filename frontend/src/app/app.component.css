@@ -1,0 +1,40 @@
+.shell {
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #d7dde5;
+  background: #f7fafc;
+}
+
+.brand {
+  font-weight: 700;
+  color: #1a202c;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: #2d3748;
+  text-decoration: none;
+}
+
+nav a.active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+main {
+  padding: 1.25rem;
+  max-width: 960px;
+  margin: 0 auto;
+}

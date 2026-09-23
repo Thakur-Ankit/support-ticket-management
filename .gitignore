@@ -25,7 +25,7 @@ credentials.json
 .specify/extensions/*/local-config.yml
 
 # ----- SpecStory / editor noise -----
-.specstory/
+# .specstory/
 *.swp
 *.swo
 *~

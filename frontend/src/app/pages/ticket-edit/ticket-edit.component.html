@@ -1,0 +1,46 @@
+<section class="page" *ngIf="!loading && !errorMessage">
+  <header class="page-header">
+    <div>
+      <h2>Edit ticket</h2>
+      <p class="meta">Status {{ statusLabel }} (content editable; status unchanged by this form)</p>
+    </div>
+    <a [routerLink]="['/tickets', ticketId]" class="btn ghost">Cancel</a>
+  </header>
+
+  <form class="form" (ngSubmit)="submit()">
+    <p class="error" *ngIf="formError">{{ formError }}</p>
+
+    <label>
+      Title
+      <input name="title" [(ngModel)]="title" required maxlength="100" />
+      <span class="field-error" *ngIf="fieldErrors['title']">{{ fieldErrors['title'] }}</span>
+    </label>
+
+    <label>
+      Description
+      <textarea name="description" [(ngModel)]="description" rows="5" required></textarea>
+      <span class="field-error" *ngIf="fieldErrors['description']">{{ fieldErrors['description'] }}</span>
+    </label>
+
+    <label>
+      Priority
+      <select name="priority" [(ngModel)]="priority">
+        <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+      </select>
+      <span class="field-error" *ngIf="fieldErrors['priority']">{{ fieldErrors['priority'] }}</span>
+    </label>
+
+    <label>
+      Assignee (leave blank to clear)
+      <input name="assignee" type="email" [(ngModel)]="assignee" />
+      <span class="field-error" *ngIf="fieldErrors['assignee']">{{ fieldErrors['assignee'] }}</span>
+    </label>
+
+    <button type="submit" class="btn primary" [disabled]="submitting">
+      {{ submitting ? 'Saving…' : 'Save changes' }}
+    </button>
+  </form>
+</section>
+
+<p *ngIf="loading">Loading…</p>
+<p class="error" *ngIf="!loading && errorMessage">{{ errorMessage }}</p>

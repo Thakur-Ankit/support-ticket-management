@@ -1,0 +1,73 @@
+<section class="page" *ngIf="!loading && ticket as t">
+  <header class="page-header">
+    <div>
+      <h2>{{ t.title }}</h2>
+      <p class="meta">{{ t.status }} · {{ t.priority }}</p>
+    </div>
+    <div class="actions">
+      <a [routerLink]="['/tickets', t.id, 'edit']" class="btn">Edit</a>
+      <a routerLink="/tickets" class="btn ghost">Back</a>
+    </div>
+  </header>
+
+  <p class="error" *ngIf="actionError">{{ actionError }}</p>
+
+  <dl class="details">
+    <dt>Description</dt>
+    <dd>{{ t.description }}</dd>
+    <dt>Assignee</dt>
+    <dd>{{ t.assignee || 'Unassigned' }}</dd>
+    <dt>Created</dt>
+    <dd>{{ t.createdAt | date:'medium' }}</dd>
+    <dt>Updated</dt>
+    <dd>{{ t.updatedAt | date:'medium' }}</dd>
+  </dl>
+
+  <section class="status-actions" *ngIf="nextStatuses.length > 0">
+    <h3>Change status</h3>
+    <p class="hint">Suggested next steps only. The server rejects illegal transitions.</p>
+    <button
+      type="button"
+      class="btn"
+      *ngFor="let s of nextStatuses"
+      [disabled]="statusBusy"
+      (click)="changeStatus(s)"
+    >
+      {{ s }}
+    </button>
+  </section>
+
+  <section class="comments">
+    <h3>Comments</h3>
+    <p *ngIf="t.comments.length === 0">No comments yet.</p>
+    <ul>
+      <li *ngFor="let c of t.comments">
+        <strong>{{ c.author }}</strong>
+        <span class="when">{{ c.createdAt | date:'medium' }}</span>
+        <p>{{ c.content }}</p>
+      </li>
+    </ul>
+
+    <form class="comment-form" *ngIf="canComment" (ngSubmit)="addComment()">
+      <p class="error" *ngIf="commentError">{{ commentError }}</p>
+      <label>
+        Author
+        <input name="author" [(ngModel)]="commentAuthor" required />
+        <span class="field-error" *ngIf="commentFieldErrors['author']">{{ commentFieldErrors['author'] }}</span>
+      </label>
+      <label>
+        Comment
+        <textarea name="content" [(ngModel)]="commentContent" rows="3" required></textarea>
+        <span class="field-error" *ngIf="commentFieldErrors['content']">{{ commentFieldErrors['content'] }}</span>
+      </label>
+      <button type="submit" class="btn primary" [disabled]="commentBusy">Add comment</button>
+    </form>
+    <p class="hint" *ngIf="!canComment">Comments cannot be added while status is {{ t.status }}.</p>
+  </section>
+</section>
+
+<p *ngIf="loading">Loading…</p>
+<p class="error" *ngIf="!loading && errorMessage">{{ errorMessage }}</p>
+<p *ngIf="!loading && errorMessage">
+  <a routerLink="/tickets">Return to list</a>
+</p>
